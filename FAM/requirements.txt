@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pymongo
+pymongo[srv]
+motor
+pydantic[email]
+passlib[bcrypt]
+fastapi-mail
+python-multipart
+python-jose[cryptography]
