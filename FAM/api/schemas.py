@@ -1,3 +1,4 @@
+import email
 import motor.motor_asyncio
 from dotenv import dotenv_values
 import os
@@ -64,6 +65,51 @@ class UserResponse(BaseModel):
             }
         }
 
+class BlogContent(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id") 
+    title: str = Field(...)
+    body: str = Field(...)
+
+    class Config: 
+        allowed_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders ={ObjectId: str}
+        schema_extra ={
+            "example":{
+                "title":"blog title",
+                "body":"blog content" 
+            }
+        }  
+
+
+
+class BlogContentResponse(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id") 
+    title: str = Field(...)
+    body: str = Field(...)
+    auther_name:str = Field(...)
+    auther_id:str = Field(...)
+    created_at:str = Field(...)
+    class Config: 
+        allowed_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders ={ObjectId: str}
+        schema_extra ={
+            "example":{
+                "title":"blog title",
+                "body":"blog content",
+                "auther_name":"name of the auther",
+                "auther_id":"ID of the auther",
+                "created_at":"date created" 
+            }
+        }  
+
 class TokenData(BaseModel):
     id: str
+
+class PasswordReset(BaseModel):
+    email: EmailStr
+
+class NewPassword(BaseModel):
+    password: str
 
